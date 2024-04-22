@@ -1,0 +1,17 @@
+{
+  "name": "express-app",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "e2e"
+  ],
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w frontend\" \"npm run dev -w backend\""
+  },
+  "keywords": [],
+  "author": "Nacho González",
+  "license": "ISC"
+}
