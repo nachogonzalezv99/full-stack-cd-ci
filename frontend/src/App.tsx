@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
+
+const backendUrl = `${import.meta.env.VITE_BACKEND_URL}:${
+  import.meta.env.VITE_BACKEND_PORT
+}`;
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [users, setUsers] = useState([]);
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    fetch(`${backendUrl}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: e.target.email.value,
+        name: e.target.name.value,
+      }),
+    }).then(res => console.log(res));
+  };
+
+  useEffect(() => {
+    fetch(`${backendUrl}/users`)
+      .then((res) => res.json())
+      .then(({ users }) => setUsers(users));
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      <h1>Users</h1>
+      {users.map((user: any) => (
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          {user.email} - ${user.name}
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      ))}
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input id="email" name="email" required />
+
+        <label htmlFor="name">Name</label>
+        <input id="name"  name="name" required />
+
+        <button>Create</button>
+      </form>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

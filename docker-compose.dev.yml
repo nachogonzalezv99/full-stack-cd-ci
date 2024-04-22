@@ -1,4 +1,5 @@
 version: "3.7"
+
 services:
   backend:
     build:
@@ -7,10 +8,13 @@ services:
       target: build
     volumes:
       - ./backend:/app
-      - /app/node_modules
     ports:
       - 4000:4000
     command: npm run dev
+    env_file:
+      - .env
+    depends_on:
+      - database
 
   frontend:
     build:
@@ -19,7 +23,16 @@ services:
       target: build
     volumes:
       - ./frontend:/app
-      - /app/node_modules
     ports:
     - 5173:5173
+    tty: true
     command: npm run dev
+    env_file:
+      - .env
+
+  database:
+    image: postgres
+    ports:
+      - 5432:5432
+    env_file:
+      - .env

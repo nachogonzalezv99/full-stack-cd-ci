@@ -1,15 +1,11 @@
 {
   "name": "express-app",
-  "workspaces": [
-    "frontend",
-    "backend",
-    "e2e"
-  ],
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm run dev -w frontend\" \"npm run dev -w backend\""
+    "dev": "docker-compose -f docker-compose.dev.yml up -d",
+    "test": "cd ./backend && npm run test:unit"
   },
   "keywords": [],
   "author": "Nacho González",

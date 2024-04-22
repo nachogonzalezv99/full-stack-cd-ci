@@ -1,11 +1,35 @@
-import express, { Express, Request, Response } from "express";
+import { PrismaClient } from "@prisma/client";
+import express, { Express, Request, Response, json, urlencoded } from "express";
+import cors from "cors";
 
 const app: Express = express();
+const prisma = new PrismaClient();
+
+app.use(cors());
+app.use(urlencoded({ extended: true }));
+app.use(json());
 
 app.get("/", (req: Request, res: Response) => {
- res.status(200).json("Hello from the server!!!");
+  res.json("Hello from the server!!!");
 });
 
-app.listen(4000, () => {
- console.log(`App is listening on port 4000`);
+app.get("/users", async (req: Request, res: Response) => {
+  const users = await prisma.user.findMany();
+  res.json({ users });
+});
+
+app.post("/users", async (req: Request, res: Response) => {
+
+  await prisma.user.create({
+    data: {
+      email: req.body.email,
+      name: req.body.name,
+    },
+  });
+
+  res.json({ message: "Success creating user" });
+});
+
+app.listen(process.env.VITE_BACKEND_PORT, () => {
+  console.log(`App is listening on port ${process.env.VITE_BACKEND_PORT}`);
 });

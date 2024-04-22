@@ -9,8 +9,6 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build -w backend
-
 #Production stage
 FROM node:16-alpine AS production
 
