@@ -7,7 +7,7 @@ COPY package*.json .
 
 RUN npm install
 
-COPY  . .
+COPY . .
 
 #Production stage
 FROM node:21-alpine AS production
