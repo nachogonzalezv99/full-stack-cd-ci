@@ -8,8 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Node.js
-        uses: actions/setup-node@v4
-      - name: Install packages
+        uses: actions/setup-node@v3
+      - name: Install dependencies
+        shell: bash
         run: npm install
       - name: Download Docker-Compose plugin
         shell: bash
