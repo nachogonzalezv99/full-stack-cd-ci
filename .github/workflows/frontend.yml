@@ -6,12 +6,11 @@ jobs:
   backend-unit-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
       - name: Install dependencies
-        working-directory: ./backend
-        run: npm install
+        run: cd backend && npm install
       - name: Run tests
         run: npm run test:backend:unit
 
