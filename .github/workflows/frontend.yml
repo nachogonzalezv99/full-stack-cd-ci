@@ -13,7 +13,7 @@ jobs:
         run: cd ./backend
       - run: npm install
       - name: Run tests
-        run: npm run test:unit
+        run: npm run test:backend:unit
 
   # integration-tests:
   #   runs-on: ubuntu-latest
