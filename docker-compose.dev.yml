@@ -3,11 +3,12 @@ version: "3.7"
 services:
   backend:
     build:
-      context: .
-      dockerfile: ./backend/Dockerfile
+      context: ./backend
+      dockerfile: ./Dockerfile
       target: build
     volumes:
       - ./backend:/app
+      - /app/node_modules
     ports:
       - 4000:4000
     command: npm run dev
@@ -18,14 +19,14 @@ services:
 
   frontend:
     build:
-      context: .
-      dockerfile: ./frontend/Dockerfile
+      context: ./frontend
+      dockerfile: ./Dockerfile
       target: build
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     ports:
-    - 5173:5173
-    tty: true
+      - 5173:5173
     command: npm run dev
     env_file:
       - .env

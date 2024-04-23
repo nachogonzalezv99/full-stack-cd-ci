@@ -31,7 +31,7 @@ function App() {
 
   return (
     <>
-      <h1>Users</h1>
+      <h1>Users page</h1>
       {users.map((user: any) => (
         <p>
           {user.email} - ${user.name}

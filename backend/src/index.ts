@@ -10,7 +10,7 @@ app.use(urlencoded({ extended: true }));
 app.use(json());
 
 app.get("/", (req: Request, res: Response) => {
-  res.json("Hello from the server!!!");
+  res.json("Hello from the server 2!!!");
 });
 
 app.get("/users", async (req: Request, res: Response) => {
