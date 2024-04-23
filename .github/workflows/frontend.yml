@@ -9,9 +9,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Node.js
         uses: actions/setup-node@v4
-      - name: Enter backend
-        run: cd ./backend
-      - run: npm install
+      - name: Install packages
+        working-directory: ./backend
+        run: npm install
       - name: Run tests
         run: npm run test:backend:unit
 
