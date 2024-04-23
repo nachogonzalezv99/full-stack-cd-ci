@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # - name: Install Node.js
-      #   uses: actions/setup-node@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
 
       - uses: hoverkraft-tech/compose-action@v1.5.1
         with:
@@ -18,9 +18,8 @@ jobs:
           POSTGRES_PASSWORD: "postgres"
           POSTGRES_DB: "mydb"
           DATABASE_URL: "postgresql://postgres:postgres@database:5432/mydb"
-      - run: npm run dev
       - name: Install Playwright
-        run: npx playwright install --with-deps
+        run: cd ./frontend && npm i
       - name: Run tests
         run: npm run test:e2e
   # integration-tests:
