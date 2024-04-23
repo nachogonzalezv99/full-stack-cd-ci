@@ -1,6 +1,6 @@
 #Build stage
 FROM node:21-alpine AS build
-
+RUN apk --no-cache add --virtual .builds-deps build-base python3
 WORKDIR /app
 
 COPY package*.json .
