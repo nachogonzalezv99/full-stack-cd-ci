@@ -11,6 +11,12 @@ jobs:
         uses: actions/setup-node@v4
       - name: Install packages
         run: npm install
+      - name: Download Docker-Compose plugin
+        shell: bash
+        run: curl -SL https://github.com/docker/compose/releases/download/v2.16.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+      - name: Make plugin executable
+        shell: bash
+        run: sudo chmod +x /usr/local/bin/docker-compose
       - name: Run tests
         run: npm run dev
 
