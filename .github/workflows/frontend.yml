@@ -10,7 +10,6 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
       - name: Install packages
-        working-directory: ./backend
         run: npm install
       - name: Run tests
         run: npm run dev
