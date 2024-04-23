@@ -20,8 +20,8 @@ jobs:
           DATABASE_URL: "postgresql://postgres:postgres@database:5432/mydb"
 
       - name: Install Playwright
-        run: cd e2e && npx playwright install --with-deps
-      - run: cd e2e && npx playwright install
+        run: cd frontend && npx playwright install --with-deps
+      - run: cd frontend && npx playwright install
       
       - name: Run tests
         run: npm run test:e2e
