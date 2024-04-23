@@ -19,6 +19,7 @@ jobs:
           POSTGRES_DB: "mydb"
           DATABASE_URL: "postgresql://postgres:postgres@database:5432/mydb"
       - run: npm run dev
+      - run: npm run test:e2e
   # integration-tests:
   #   runs-on: ubuntu-latest
   #   steps:

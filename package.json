@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "docker-compose -f docker-compose.dev.yml up -d",
     "test:backend:unit": "cd ./backend && npm run test:unit",
-    "test:frontend:unit": "cd ./frontend && npm run test:unit"
+    "test:frontend:unit": "cd ./frontend && npm run test:unit",
+    "test:e2e": "cd ./frontend && npm run test"
   },
   "keywords": [],
   "author": "Nacho González",
