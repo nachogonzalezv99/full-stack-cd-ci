@@ -10,13 +10,8 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
       
-      # - run: npm i
-
-      - uses: hoverkraft-tech/compose-action@v1.5.1
-        with:
-          compose-file: "./docker-compose.dev.yml"
-          services: |
-            backend
+      - run: cd frontend && npm i
+      - run: cd frontend && npm run dev
         
       
       - name: Run tests
