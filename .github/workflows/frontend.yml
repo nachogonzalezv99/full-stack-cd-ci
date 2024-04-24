@@ -10,7 +10,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
       
-      - run: npm run i
+      - run: npm i
 
       - uses: hoverkraft-tech/compose-action@v1.5.1
         with:
