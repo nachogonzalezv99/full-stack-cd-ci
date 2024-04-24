@@ -3,7 +3,26 @@ name: CI
 on: [push]
 
 jobs:
-  backend-unit-tests:
+  backend-unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+      
+      # - run: npm i
+
+      - uses: hoverkraft-tech/compose-action@v1.5.1
+        with:
+          compose-file: "./docker-compose.dev.yml"
+          services: |
+            backend
+        
+      
+      - name: Run tests
+        run: npm run test:backend:unit
+
+  e2e-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,29 +39,6 @@ jobs:
           POSTGRES_PASSWORD: "postgres"
           POSTGRES_DB: "mydb"
           DATABASE_URL: "postgresql://postgres:postgres@database:5432/mydb"
-
-      - name: Install Playwright
-        run: npx playwright install
       
       - name: Run tests
         run: npm run test:e2e
-  # integration-tests:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: ./.github/actions/build
-  #     - uses: ./.github/actions/docker-compose
-  #     - name: Run tests
-  #       run: npm run test:backend:int
-
-  # e2e-tests:
-    # runs-on: ubuntu-latest
-    # steps:
-    #   - uses: actions/checkout@v3
-    #   - uses: ./.github/actions/build
-    #   - uses: ./.github/actions/docker-compose
-    #   - name: Install Playwright
-    #     run: cd e2e && npx playwright install --with-deps
-    #   - run: cd e2e && npx playwright install
-    #   - name: Run tests
-    #     run: npm run test:e2e
