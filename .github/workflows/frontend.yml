@@ -10,10 +10,8 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
       
-      - run: cd frontend && npm i
-      - run: cd frontend && npm run dev
+      - run: cd backend && npm i
         
-      
       - name: Run tests
         run: npm run test:backend:unit
 
