@@ -4,34 +4,22 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ${{matrix.os}}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-        node-versions: ["16", "18", "20"]
+    runs-on: ubuntu-18
 
-    name: ${{matrix.os}} Node ${{matrix.node-versions}}
     steps:
       - uses: actions/checkout@v1
-
-      - name: Hello!
-        run: echo "Hello from ${{github.workflow}} triggered by the ${{github.event_name}} done by ${{github.actor}}"
-
-      - name: More and More
-        env:
-          JOB_CONTEXT: ${{toJson(job)}}
-        run: |
-          echo "Job Context: $JOB_CONTEXT"
-          echo Done!
-
-      - name: Greeting if windows
-        if: matrix.os == 'windows-latest'
-        run: echo "Hey from windows"
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{matrix.node-versions}}
+          node-version: 20
+          # cache: 'npm'
+      # - uses: actions/cache@v2
+      #   with:
+      #     path: ~/backend/node_modules
+      #     key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
+      #     restore-keys: |
+      #       ${{ runner.OS }}-npm-cache-
 
       - name: Install dependencies
         working-directory: ./backend
@@ -40,6 +28,7 @@ jobs:
       - name: Run tests
         working-directory: ./backend
         run: npm run test:unit
+      
 
   # backend-unit-test:
   #   runs-on: ubuntu-latest
