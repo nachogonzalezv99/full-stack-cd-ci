@@ -8,6 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
+        node-versions: ["16", "18", "20"]
 
     name: ${{matrix.os}}
     steps:
@@ -23,13 +24,22 @@ jobs:
           echo "Job Context: $JOB_CONTEXT"
           echo Done!
 
-      # - name: Install dependencies
-      #   working-directory: ./backend
-      #   run: npm install
+      - name: Greeting if windows
+        if: matrix.os == "windows-latest"
+        run: echo "Hey from windows"
 
-      # - name: Run tests
-      #   working-directory: ./backend
-      #   run: npm run test:unit
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.node-versions}}
+
+      - name: Install dependencies
+        working-directory: ./backend
+        run: npm install
+
+      - name: Run tests
+        working-directory: ./backend
+        run: npm run test:unit
 
   # backend-unit-test:
   #   runs-on: ubuntu-latest
