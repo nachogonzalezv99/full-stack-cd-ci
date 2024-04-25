@@ -15,12 +15,7 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-      # - uses: actions/cache@v2
-      #   with:
-      #     path: ~/backend/node_modules
-      #     key: ${{ runner.OS }}-npm-cache-${{ hashFiles('**/package-lock.json') }}
-      #     restore-keys: |
-      #       ${{ runner.OS }}-npm-cache-
+          cache-dependency-path: backend/package-lock.json
 
       - name: Install dependencies
         working-directory: ./backend
