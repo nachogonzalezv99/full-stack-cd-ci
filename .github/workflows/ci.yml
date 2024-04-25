@@ -1,0 +1,58 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Hello!
+        run: echo "Hello from ${{github.workflow}} triggered by the ${{github.event_name}} done by ${{github.actor}}"
+
+  # backend-unit-test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install Node.js
+  #       uses: actions/setup-node@v4
+      
+  #     - run: cd backend && npm i
+        
+  #     - name: Run tests
+  #       run: npm run test:backend:unit
+
+  # frontend-unit-test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install Node.js
+  #       uses: actions/setup-node@v4
+      
+  #     - run: cd frontend && npm i
+        
+  #     - name: Run tests
+  #       run: npm run test:frontend:unit
+
+  # e2e-tests:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install Node.js
+  #       uses: actions/setup-node@v4
+      
+  #     - run: npm i
+
+  #     - uses: hoverkraft-tech/compose-action@v1.5.1
+  #       with:
+  #         compose-file: "./docker-compose.dev.yml"
+  #       env:
+  #         POSTGRES_USER: "postgres"
+  #         POSTGRES_PASSWORD: "postgres"
+  #         POSTGRES_DB: "mydb"
+  #         DATABASE_URL: "postgresql://postgres:postgres@database:5432/mydb"
+      
+  #     - name: Run tests
+  #       run: npm run test:e2e
