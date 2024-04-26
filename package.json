@@ -4,16 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "pull": "git pull && concurrently \"cd frontend && npm i\" \"cd backend && npm i\"",
     "dev": "docker-compose -f docker-compose.dev.yml up -d",
     "test:backend:unit": "cd ./backend && npm run test:unit",
     "test:frontend:unit": "cd ./frontend && npm run test:unit",
-    "test:e2e": "npx playwright test"
+    "test:unit": "npm run test:backend:unit && npm run test:frontend:unit",
+    "test:e2e": "npx playwright test",
+    "test": "npm run test:unit && npm run test:e2e"
   },
   "keywords": [],
   "author": "Nacho González",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.43.1",
-    "@types/node": "^20.12.7"
+    "@types/node": "^20.12.7",
+    "concurrently": "^8.2.2"
   }
 }
