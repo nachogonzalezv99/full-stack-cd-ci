@@ -12,12 +12,12 @@ jobs:
 
       - run: npm run dev
     
-      - name: Wait for the environment to get up
-        run: |
-          while ! docker exec database mysqladmin --user=root --password= --host "127.0.0.1" ping --silent &> /dev/null ; do
-              echo "Waiting for database connection..."
-              sleep 2
-          done
+      # - name: Wait for the environment to get up
+      #   run: |
+      #     while ! docker exec database mysqladmin --user=root --password= --host "127.0.0.1" ping --silent &> /dev/null ; do
+      #         echo "Waiting for database connection..."
+      #         sleep 2
+      #     done
 
       - run: docker exec backend npm run test
 
